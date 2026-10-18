@@ -1,0 +1,85 @@
+\documentclass[11pt]{article}
+\input{preamble}
+
+\title{Algebraic Numbers and Functions Course Notes}
+\author{Caelen Gelineau}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Galois review}
+\begin{definition}
+    Seperable means equivalently
+    \begin{enumerate}
+        \item the number of distinct $k$-embeddings $L \hookrightarrow K$ is $[L:K]$
+        \item For $\alpha \in L$, the minimal polynomial of $\alpha$ over $K$ is "seperable": having no repeated 
+        roots in $\overline{K}$, i.e. gcd($f(x), f'(x)$) $ = 1$.
+    \end{enumerate}
+    
+\end{definition}
+\begin{definition}
+    Normal means equivalently
+    \begin{enumerate}
+        \item every $k$-embedding $L \hookrightarrow \overline{K}$ has the same image
+        \item $L$ is a splitting field (of a family of polynomials).
+        \item Given an irreducible polynomial $f(x) \in K[x]$, either has no roots in $L$ or all of its roots are in $L$.
+    \end{enumerate}
+    
+\end{definition}
+
+\begin{definition}
+    $K \subseteq L$ is Galois if it is separable and normal.
+\end{definition}
+
+\begin{definition}
+    \[
+        \text{Gal}(L/K) := \{ \sigma: L \rightarrow L \text{ automorphisms s.t. } \sigma|_k = id_k\}
+    \]
+    (fixing base $k$-embedding $L \hookrightarrow \overline{K})$, Gal is identified with k-embeddings $L \hookrightarrow \overline{K}$.
+\end{definition}
+If $L$ is a finite Galois group over $K$, the Galois correspondence:
+subgroups
+\[
+    \{H \le G\}
+\]
+intermediate fields:
+\[
+    \{K \le F \le L\}
+\]
+$H \mapsto L^H := \{\alpha \in L | \sigma(\alpha) = \alpha \text{ for } \sigma \in H\} $ and
+\[
+    F \mapsto \text{Gal}(L/F)
+\]
+$H \trianglelefteq G$ iff $F$ is Galois / $K$.\\
+$|\text{Gal}(L/K)| = [L:K]$.
+
+
+
+\section{PRime ideals}
+$P$ is a prime ideal. We have $P \subset R \subset K$. If we Galois extension $K$ to $L$, we have $Q \subset S \subset L$.
+\begin{definition}
+    $P \subset Q$ means "$Q$ is a prime over $P$".
+\end{definition}
+\begin{theorem}
+    Theorem 19 of marcus.
+    \begin{enumerate}
+        \item $P \subset Q \implies Q \cap R = P$.
+    \end{enumerate}
+    
+\end{theorem}
+\begin{theorem}
+    Theorem 20 of marcus.\\
+    Every $P$ has exactly $\ge 1$ $Q$ and every $Q$ has exactly 1 $P$.
+\end{theorem}
+
+
+
+
+
+
+
+
+
+\end{document}

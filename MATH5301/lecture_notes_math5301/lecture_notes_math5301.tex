@@ -1,0 +1,175 @@
+\documentclass[11pt]{article}
+\input{preamble}
+\begin{document}
+
+\title{MATH5301 Lecture Notes}
+\author{Caelen Gelineau}
+\date{\today}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Lecture 9 - 22/09/26}
+\begin{definition}
+    $A \subseteq  S$ is totally bounded if 
+    \[
+        \forall_{\epsilon>0}\exists_{a_1, \dots, a_n \subset A} A \subset \bigcup B_{\epsilon}(a_i)
+    \]
+    
+\end{definition}
+\begin{definition}
+    $A$ is sequentially compact if 
+    \[
+        \forall_{ \{x_n\} \subset A }\exists_{\{n_k \}\subset \N} \lim_{k \to \infty} x_{n_k} = x_0 \in A
+    \]
+\end{definition}
+
+\begin{theorem}
+    $(S, d)$ metric space, $A \subset S$. $A$ is complete and totally bounded $\implies$ $A$ is sequentially compact.
+\end{theorem}
+\begin{proof}
+    We will build the subsequence. Pick $\{x_n\} \subset A$.\\
+    First, we prove that if $A$ is totally bounded $\implies $ $\forall_{k \in \N} \exists_{a_k \in A}$ ($B_{\frac{1}{k}}(a_k)$ contains an infinite number of elements of $\{x_k\}$).
+    Assume there does not exist an open ball with an infinite number of elements. Since $A$ has a finite cover, there are a finite number of open balls covering $A$. But then,
+    none of the balls can contain an infinite number of elements by assumption, contradiction.\\
+\begin{enumerate}
+    \item Fix $k = 1$. By the above, we have some $B_{1}(a_1)$ with infinite elements of $\{x_n\}$. Choose some $x_1 \in \{x_n\}$. Delete all elements of $\{x_n\}$ outside
+    $B_1(a_1)$ but keep $x_1$. Call the new sequence $\{x_n\}$ again.
+    \[
+        d(x_n, x_m) < d(x_n, a_1) + d(x_m, a_1) < 1+1 = 2, \quad n,m > 1
+    \]
+    \item Now consider $k = 2$. Apply the above lemma to the new sequence, which implies $B_{\frac{1}{2}}(a_2)$ contains an infinite number of elements from the new sequence. 
+    Now, choose $x_2 \in \{x_n\}$, which is the sequence. Delete all elements of $\{x_n\}$ outside the new ball, but keep $x_1$ and $x_2$.
+    Call the new sequence $\{x_n\}$ again.
+    \[
+        d(x_n, x_m) < \frac{1}{2} + \frac{1}{2} = 1, \quad n, m > 2
+    \]
+    \item[n.] $k = N$. Apply the lemma, delete all elements outside $B_{\frac{1}{N}}(a_n)$ but keep $x_1, \dots, x_N$.
+    \[
+        d(x_n, x_m) < 2 \cdot \frac{1}{N}, \quad n,m > N
+    \]
+   We save the elements $x_n$ each time to make sure our building sequence still has countably many elements left even after deleting.
+\end{enumerate}
+After the $N$ steps, we have a Cauchy subsequence of the original sequence. Since complete space, it is convergent to $x_0$. Thus, sequentially compact satisfied.
+\end{proof}
+
+\section{Lecture 10 - 24/09/26}
+\subsection{Compact Sets}
+\begin{definition}[7.4]
+    Let $\{U_\lambda\}_{\lambda \in \Lambda}$ be a family of subsets of a metric space $(S,d)$.
+    \begin{enumerate}
+        \item$\{U_\lambda\}$ is a cover of $A$ if $A \subset \bigcup A_\lambda$ 
+        \item $\{U_\lambda\}$ is an open cover if $\{U_\lambda\}$ is a cover and each $U_\lambda$ is open.
+        \item $\{U_\lambda\}_{\lambda \in \Lambda'}$ is a subcover of $\{U_\lambda\}$ if $\Lambda' \subset \Lambda$.
+        \item  $\{U_\lambda\}$ is a finite cover if $\Lambda$ is finite.
+    \end{enumerate}
+    
+\end{definition}
+\begin{definition}[7.5]
+    $A$ is compact if every open cover of $A$ contains a finite subcover.
+\end{definition}
+
+\begin{example}[7.1]
+    If $A$ and $C$ are compact, then $A \cup C$ is compact.
+\end{example}
+\begin{proof}
+    Fix an arbitrary open cover $\{U_\lambda\}_{\lambda \in \Lambda}$ of $A \cup C$. Then this cover is an open cover of $A$.\\
+    Since $A$ is compact, there exists a finite $\Lambda' \subset \Lambda$ such that $\{U_\lambda\}_{\lambda \in \Lambda'}$ is a cover of $A$.
+    Do the same for $C$. Then the union of the two finite subcovers covers $A \cup C$.
+\end{proof}
+
+\begin{lemma}[Lebesque covering lemma]
+    Let $\{U_\lambda\}$ be an open cover of $A$. If $A$ is sequentially compact, then 
+    \[
+        \exists_{\epsilon>0} \forall_{x \in A} \exists_{\lambda \in \Lambda} B_{\epsilon}(x) \subset U_{\lambda}
+    \]
+\end{lemma}
+\begin{proof}
+    Assume the contrary
+    \[
+        \forall_{\epsilon>0}\exists_{x \in A}\forall_{\lambda \in \Lambda} B_\epsilon(x) \not \subset U_{\lambda}
+    \]
+    \[
+        \forall_{\frac{1}{n}>0}\exists_{x_n \in A}\forall_{\lambda \in \Lambda} B_{\frac{1}{n}}(x_n) \not \subset U_{\lambda}
+    \]
+    By definition of sequentially compact,
+    \[
+        \{x_n\} \subset A \implies \exists_{\text{convergent }\{x_{n_k}\} \subset \{x_n\}} \land \lim_{k \to \infty} x_{n_k} = x_n \in A
+    \]
+    \[
+        x_0 \in A \subset \bigcup U_{\lambda} \implies x_0 \in \bigcup U_\lambda \implies \exists_{\lambda\in\Lambda}x_0 \in U_{\lambda_0}
+    \]
+    We claim $B_{\frac{1}{n_k}}(x_{n_k}) \subset U_{\lambda_0}$ for sufficiently large $k \in \N$. 
+    We want to estimate the distance between the ball and $x_0$. Pick $y \in B_{\frac{1}{n_k}}(x_{n_k})$ and compute $(y, x_0) \le d(y,x_{n_k}) + d(x_{n_k}, x_0)$
+    note that
+    \[
+        d(y,x_{n_k}) < \frac{1}{n_k}, \quad d(x_{n_k}, x_0) \rightarrow 0 \text{ as } k \rightarrow \infty
+    \]
+    Since $U_{\lambda_0}$ is open, 
+    \[
+        \exists_{r> 0 } B_r(x_0) \subset U_{\lambda_0}
+    \]
+    Now we have to observe that for sufficiently large $k$, 
+    \[
+        d(y,x_{n_k}) < \frac{r}{2} \land d(x_{n_k}, x_0) < \frac{r}{2}
+    \]
+    
+\end{proof}
+
+\section{Lecture 11 - 29/09/26}
+\begin{theorem}[7.1]
+    If $A$ is complete and totally bounded, $A$ is sequentially compact.
+\end{theorem}
+
+\begin{theorem}[8.1]
+    If $A$ is complete and totally bounded, $A$ is compact.
+\end{theorem}
+\begin{proof}
+    Let $\{U_{\lambda}\}$ be an arbitrary open cover of $A$.
+    Need to prove $\exists_{\text{ finite } \Lambda' \in \Lambda} \bigcup_{\lambda in \Lambda'}U_\lambda \supset A$.\\
+    By Theorem 7.1, $A$ is sequentially compact.\\ 
+    Then by Lebesque covering lemma, $\exists \epsilon > 0, \forall x \in A \exists_{\lambda \in \Lambda} B_\epsilon(x) \subset U_\lambda$.\\
+    By total boundedness of $A$, $\exists_{\{a_1, \dots, a_n\} \subset A} \bigcup^n_{i=1}B_\epsilon(a_i) \supset A$.\\
+    Then $\forall_{i \in 1,n}\exists_{\lambda_i\in \Lambda}\exists_{\lambda_i \in \Lambda}B_\epsilon(a_i) \subset U_{\lambda_i}$.\\
+    Then $\Lambda' = \{\lambda_1, \dots, \lambda_n\}$ is the required one for compactness.
+\end{proof}
+\begin{theorem}[9.2]
+    If $A$ is sequentially compact, then $A$ is totally bounded and complete.
+\end{theorem}
+\begin{proof}
+    Completeness. Take an arbitrary Cauchy sequence $\{x_n\} \subset A$. \\
+    From sequential compactness, $\exists_{\{x_{n_k}\} \subset \{x_n\}} \lim_{k \to \infty}x_{n_k} = x_0 \in A$.\\
+    Therefore the limit of $\{x_n\}$ exists and $\lim_{n \to \infty} \{x_n\} = x_0$.\\
+    Total boundedness. Assume $A$ is not totally bounded. Then $\exists_{\epsilon > 0} \forall_{\{a_1,\dots,a_n\} \subset A}A \backslash \bigcup^n_{i=1}B_\epsilon (a_i) \ne \emptyset$($*$)\\
+    Fix $x_1 \in A$.
+    \begin{enumerate}
+        \item[Step 1:] Apply ($*$) with $\{a_1,\dots,a_n\} = \{x_1\}$. By the statement, $A \backslash B_\epsilon(x_1) \ne \emptyset$.
+        Then pick from non-empty set $x_2 \in A \backslash B_\epsilon(x_1)$.
+        \item[Step 2:] Apply ($*$) with $\{a_1, \dots, a_n\} = \{x_1, x_2\}$. By (*), $A \backslash B_\epsilon(x_1) \cup B_\epsilon(x_2) \ne \emptyset$. Pick $x_3 \in A \backslash B_\epsilon(x_1) \cup B_\epsilon(x_2)$.
+    \end{enumerate}
+    continue building sets then $x_{k+1} \in A \backslash \bigcup^{k} B_\epsilon (x_i)$. Then distance $d(x_{k+1}, x_i) > \epsilon$. We claim none of the subsequences from our constructed sequence are convergent. Then the distance shows that 
+    for any subsequence, it is not Cauchy and does not converge to element in $S$ This contradicts sequential compactness.
+\end{proof}
+\begin{theorem}[9.1]
+    If $A$ is compact, $A$ is sequentially compact.
+\end{theorem}
+\begin{proof}
+    Assume the contrary, $\exists_{\{x_n\}_{n=1}^\infty \subset A}$ s.t. $\{x_n\}$ doesn't contain a convergent subsequence. ($*$)\\
+    We claim ($*$) implies elements of $\{x_n\}$ are isolated, i.e. 
+    \[
+        \forall _{n \in \N}B_\epsilon(x_n) \cap \{x_n\}_{n=1}^\infty = \{x_n\} \text{ where } \{x_i\}_{n=1}^\infty = \bigcup \{x_i\}
+    \]
+    Assume by contradiction that this doesnt hold. Then
+    \[
+        \exists_{n_*\in \N}\forall_{\epsilon > 0}B_\epsilon(x_{n_k})\cap \{x_n\}_{n=1}^\infty \ne \{x_{n_*}\}
+    \]
+   Consider the following covering of $A$: $\{U_i\}_{i \in \overline{0,\infty}}$ where $U_i = B_{\epsilon_i}(x_i), i \in \overline{1, \infty}$, and $U_0 = S \backslash \{x_n\}_{n=1}^{\infty}$. Note that $U_0$ is open if $ \{x_n\}_{n=1}^{\infty}$ is closed.
+   Recall that if a set has a limit point outside of itself, the set is not closed. Since $\{x_n\}_{n=1}^\infty$ may have limit points not in $A$, $U_0$ is not guarenteed to be open. Thus, if we modify $U_0$ to have removed the limit points,
+   \[
+    U_0 = S \backslash \{x_n\}_{n=1}^{\infty} \cup (\{x_n\}_{n=1}^{\infty})'
+   \]
+    We notice that all of the limit points are outside of $A$. 
+\end{proof}
+
+\section{Lecture 12 - 01/10/26}
+\end{document}

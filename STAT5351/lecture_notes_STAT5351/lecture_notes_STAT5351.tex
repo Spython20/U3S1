@@ -1,0 +1,578 @@
+\documentclass[11pt]{article}
+\input{preamble}
+
+\title{STAT5351 Lecture Notes}
+\author{Caelen Gelineau}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Lecture 1 - 24/08/26}
+\subsection{Counting principle}
+Suppose you can solve a problem in 2 steps, with $n_1$ ways for step 1 and $n_2$ ways for step 2. \\
+How many ways can you solve the problem?
+\[
+    \begin{matrix}
+        (x_1, y_1) & (x_1, y_2) & \dots & (x_1, y_{n_2})\\
+        \vdots\\
+        (x_{n_1}, y_1) & (x_{n_1}, y_2) & \dots & (x_{n_1}, y_{n_2})
+    \end{matrix}
+\]
+Thus, there are $n_1 \cdot n_2$ ways.
+\begin{theorem}
+    Given $r$ steps to solve a problem and $n_i$ ways to solve step $i$, then the problem can be
+    solve in $n_1 \cdot n_2 \cdot \dots \cdot n_r$ ways.
+\end{theorem}
+\subsection{Permutations}
+\begin{definition}
+    A permutation on $n$ different elements is a $\textbf{DISTINCT}$ arrangement of the $n$ elements, where distinct arrangement
+    means no repetition of elements in the arrangement.
+\end{definition}
+
+\begin{theorem}
+    The number of permutations of $n$ unique elements is $n \cdot (n-1) \cdot (n-2) \dots \cdot 2 \cdot 1 = n!$. 
+\end{theorem}
+
+\begin{theorem}
+    The number of permutations of $n$ elements taken $r$ at a time is \\
+    $\text{nPr} = n(n-1)(n-2)\cdots (n-r+1) = \frac{n!}{(n-r)!}$
+\end{theorem}
+
+\begin{theorem}
+    Suppose $n$ elements have $k$ different types: $n_1$ of type 1 to $n_k$ of type k. Then $n = n_1 + \cdots + n_k$ and the number
+    of permutations of $n$ elements is $\frac{n!}{n_1!n_2!\cdots n_k!}$.
+\end{theorem}
+
+\subsection{Combinations}
+\begin{definition}
+    A combination of $n$ different elements taken $r$ at a time is a selection of $r$ elements from $n$ elements without regard to the order of selection.
+\end{definition}
+\begin{theorem}
+    The number of permutations of $n$ elements taken $r$ at a time ($n$ choose $r$) is 
+    \[
+        \text{nPr} = \frac{n!}{(n-r)!r!}
+    \]
+    
+\end{theorem}
+
+\section{Lecture 2 - 26/08/26}
+\subsection{Partitions}
+\begin{definition}
+    A partition of $n$ elements into $k$ subsets is a way to separate $n$ elements into $k$ groups without regard for order.
+\end{definition}
+
+\begin{theorem}
+    The number of ways in which $n$ elements can be partitioned into $k$ subsets such that $n_1$ elements in subset 1, 
+    $n_2$ in subset 2, etc is 
+    \[
+        \frac{n!}{n_1!n_2! \cdots n_k!}
+    \]
+\end{theorem}
+
+\section{Lecture 3 - 31/08/26}
+\subsection{Discrete probability function}
+Discrete probability function $P$ has the following properties:
+\begin{enumerate}
+    \item $P(S) = 1$.
+    \item $P(\emptyset) = 0$.
+    \item $P(A^c) = 1 - P(A)$.
+    \item $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
+    \item If $A \cap B = \emptyset$, $P(A \cup B) = P(A) + P(B)$.
+    \item $A, B \subset S$, $A \subseteq B \implies P(A) \le P(B)$.
+\end{enumerate}
+
+\section{Lecture 4 - 02/09/26}
+\subsection{Conditional Probability}
+
+If $B$ has occurred, what is the probability of $A$?
+\begin{theorem}
+    $P(A|B) = \frac{P(A \cap B)}{P(B)}$
+\end{theorem}
+\begin{theorem}
+    $P(A \cap B) = P(A|B) \cdot P(B)$
+\end{theorem}
+\begin{theorem}
+    $P(A \cap B \cap C) = P(A)P(B|A)P(C|A \cap B)$
+\end{theorem}
+
+\section{Lecture 5 - 09/09/26}
+\subsection{Bayes' Theorem}
+\begin{definition}
+    $A_1, \dots, A_k \subset B$ form a partition of B if $A_i$ are all mutually exclusive.
+\end{definition}
+\begin{remark}
+    For a partiton of $B$,
+    \[
+        P(B) = P(A_1 \cap B) + \cdots + P(A_k\cap B) = P(B|A_1)P(A_1) \cdots P(B|A_k)P(A_k)
+    \]
+\end{remark}
+\begin{theorem}
+    $P(B) = \sum_{n=1}^{k}P(B|A_i)P(A_i)$.
+\end{theorem}
+\begin{theorem}[Bayes' Theorem]
+    \[
+        P(A_i | B) = \frac{P(A_i)P(B|A_i)}{\sum_{j} P(B|A_j)P(A_j)}
+    \]
+\end{theorem}
+Bayesian inference is forming an event $B$ to conclude the cause, i.e. which $A_i$ is the cause of $B$.
+\subsection{Independent Events}
+\begin{definition}
+    Two events are independent if 
+    \[
+        P(A \cap B) = P(A)P(B)
+    \]
+    if they are not independent they are dependent.
+\end{definition}
+\begin{theorem}
+    If $A$ and $B$ are independent, then $A$ and $B^c$ are independent.
+\end{theorem}
+
+\section{Lecture 6 - 14/09/26}
+\subsection{Random Variables}
+\begin{definition}
+    Let $S$ be a sample space with a probability function $P$. A random variable is a function $X: S \rightarrow \R$.
+    The notation is $P(X=b) :=$ probability of event $\{X = b\}$.
+\end{definition}
+
+\section{Lecture 7 - 16/09/26}
+\subsection{Probability mass function}
+\begin{theorem}
+Let $X$ be a discrete random variable on $S$ such that $b_1, \dots, b_n$ are the values in the image of $X$. Then $\{X=b_1\}, \dots, \{X =b_n\}$ form a partition of $S$.
+\end{theorem}
+\begin{definition}
+    The probability mass function of $X$ is 
+    \[
+        f(y) := P(X = y), \quad \forall y \in \text{image of } X
+    \]
+\end{definition}
+\begin{theorem}
+    If $f(y)$ is a pmf of $X$, then
+    \begin{enumerate}
+        \item $f(y) \ge 0$.
+        \item $\sum_{y}f(y) = 1 \iff \sum f(b_i) = 1$.
+    \end{enumerate}
+\end{theorem}
+\subsection{Cumulative Distribution}
+\begin{definition}
+    $F(y):= P(X \ge y), \quad \forall y \in -\infty < y < \infty$ is the cumulative distribution of $X$. It measures the accumulation of probability as $y$ increases.
+\end{definition}
+
+\section{Lecture 8 - 21/09/26}
+\begin{example}
+$F(y)$ is the cumulative distribution of X.
+\[
+    F(y) = 
+    \begin{cases}
+        0 \quad y < 1\\
+        \frac{1}{3} \quad 1 \le y < 4\\
+        \frac{1}{2} \quad 1 \le 4 < 6 \\
+        \frac{5}{6} \quad 6 \le 4 < 10 \\
+        1 \quad y \ge 10 
+    \end{cases}
+\]
+$P(X = 4) =$ ?, $P(2 < X \le 6) = $ ?\\
+First, find the probability mass function (p.m.f). X takes values $b_1 = 1, b_2 = 4, b_3 = 6, b_4 = 10$.\\
+Recall that $F(b_{i + 1}) = F(b_i) + f(b_i+1)$ where f is the p.m.f.\\
+\[
+    f(b_1) = f(1) = F(1) - 0 = \frac{1}{3}
+\] 
+\[
+    f(b_2) = f(4) = F(4) - F(1) = \frac{1}{2}- \frac{1}{3} = \frac{1}{6}
+\]
+\[
+    f(b_3) = \frac{1}{3}
+\]
+\[
+    f(b_4) = \frac{1}{6}
+\]
+Thus,
+\[
+    P(X=4) = f(4) = \frac{1}{6}
+\]
+and since 4 is inside the interval $(2, 6]$, then 
+\[
+    (X=4) \cup (X=6)
+\]
+and since the events are mutually exclusive,
+\[
+    P(2 < X \le 6) = P(X = 4) + P(X=6)
+\]
+\[
+    = f(4) + f(6) = \frac{1}{2}
+\]
+\end{example}
+\begin{example}
+$X$ is a discrete random variable with cumulative distribution
+\[
+    F(x) =
+    \begin{cases}
+        0 \quad y < -1\\
+        \frac{1}{9} \quad -1 \le y < 1\\
+        \frac{5}{9} \quad 1 \le y < 3 \\
+        \frac{8}{9} \quad 3 \le y < 5\\
+        1 \quad y \ge 5
+    \end{cases}
+\]
+
+Find the pmf of $X$ and $P(0 \le X < 5)$.\\
+$X$ takes values $-1, 1, 3, 5$. Find the pmf:
+\[
+    f(-1) = \frac{1}{9}
+\]
+\[
+    f(1) = \frac{5}{9} - \frac{1}{9} = \frac{4}{9}
+\]
+\[
+    f(3) = \frac{1}{3}
+\]
+\[
+    f(5) = \frac{1}{9}
+\]
+\[
+    P(0 \le X < 5) = P(X=1) + P(X=3) = f(1) + f(3) = \frac{7}{9}
+\]
+\end{example}
+\subsection{Continuous random variables}
+\begin{definition}
+    Let $S$ be a continous sample space. $X: S \rightarrow \R$ is a continous random variable if there 
+    exists a function $f(t) \ge 0$ defined on $\R$ such that 
+    \[
+        P(a \le X \le b) = \int_{a}^{b}f(t) dt
+    \]
+    $f(t)$ is called the probability density function of $X$.
+\end{definition}
+\begin{remark}
+    $f(t) \ge 0$ is defined for ALL $t \in \R$.
+\end{remark}
+\begin{theorem}
+    Let $X$ be a continuous random variable, and $f$ the pdf of $X$. Then
+    \begin{itemize}
+        \item $P(X = a) = 0$
+        \item $P(a \le X \le b) = P(a \le X < b) = \dots$
+        \item $\int_{-\infty}^{\infty} f(t)\, dt$ = 1
+    \end{itemize}
+\end{theorem}
+
+\begin{definition}
+    Let $X$ be a continous random variable and $f(t)$ the pdf. THen
+    \[
+        F(y) = P(X \le y) = \int_{-\infty}^{y}f(t) \, dt
+    \]
+    is called the cumulative distribution function of X.
+\end{definition}
+
+\begin{theorem}
+   Let $f$ be the pdf and $F$ the cdf of X.
+   \begin{itemize}
+    \item $P(a \le X \le b) = F(b) = F(a)$
+    \item if $f$ is a continuous function on $\R$ then $f(y) = \frac{dF(y)}{dy}$.
+   \end{itemize}
+    
+\end{theorem}
+
+\subsection{\texorpdfstring{Comparison of discrete and continous random variables $X$}{Comparison of discrete and continous X}}
+\subsubsection{Discrete}
+\begin{itemize}
+    \item $f$ is pmf
+    \item $f$ defined on discrete values
+    \item $F$ is a cumulative distribution
+    \item $F(y)$ = $\sum_{b_i \le y}^{\infty} f(b_i)$
+    \item $P(a < X \le B) = F(b) - F(a)$, the endpoints matter
+\end{itemize}
+\subsubsection{Continuous}
+\begin{itemize}
+    \item $f$ is a pdf
+    \item $f$ is defined on $\R$
+    \item $F$ is a cdf
+    \item $F(y) = \int_{-\infty}^{y} f(t)\, dt$
+    \item $P(a \le X \le b) = \int_{a}^{b} f(t) \, dt$, the endpoints don't matter.
+\end{itemize}
+
+\section{Lecture 9 - 23/09/26}
+\subsection{Joint/marginal distribution of discrete random variables}
+For discrete random variables $X, Y$, can we find $P(X=Y)$ by using the pmf $f,g$ respectively? 
+No, we need more information about their relation.
+\begin{definition}
+    $X, Y$ disc. rand. vars. 
+    \[
+        f(x, y) = P(X=x, Y=y)
+    \]
+    for the pair $(x,y)$ in the range of $X, Y$ is called the joint probability mass function of $X,Y$.
+\end{definition}
+\begin{theorem}
+    if $f(x,y)$ is joint pmf,
+    \begin{enumerate}
+        \item $f(x,y) > 0$
+        \item $\sum_{x} \sum_{y} f(x,y) = 1$
+    \end{enumerate}
+\end{theorem}
+
+\begin{definition}
+    Joint cumulative distribution of discrete random variables $X,Y$ is defined as
+    \[
+        F(x,y) = P(X \le x, Y \le y) = \sum_{s\le x} \sum_{t \le y}f(s,t)
+    \]
+\end{definition}
+\begin{remark}
+    Joint pmf is defined on discrete values but the joint cumulative distribution is defined on $\R^2$.
+\end{remark}
+Suppose we are given $f(x,y)$, the joint pmf of $X$ and $Y$. How do we find the pmfs of $X$ and $Y$? Idk.
+\begin{definition}
+    $f(x,y)$ the joint pmf of $X,Y$. For each $x$ in range of $X$, 
+    \[
+        g(x) = \sum_{y} f(x,y)
+    \]
+    is called the marginal pmf of $X$. The marginal pmf of $X$ is just the pmf of $X$.
+    
+\end{definition}
+\begin{definition}
+    $f(x,y)$ is a joint pdf of $X, Y$. if it satisfies
+    \begin{enumerate}
+        \item $f(x,y) \ge 0$ it is defined for all $(x,y) \in \R^2$.
+        \item $P(X,Y) \in A = \int \int_A f(x,y)dxdy$
+    \end{enumerate}
+    
+\end{definition}
+
+\begin{theorem}
+    $f(x,y)$ is a joint pdf. Then
+    \[
+        \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} f(x,y)\, dxdy = 1
+    \]
+    
+\end{theorem}
+
+\section{Lecture 10 - 28/09/26}
+Exam 1 Review.
+
+\section{Lecture 11 - 05/10/26}
+\subsection{Marginal pdfs and pmfs}
+\begin{definition}
+    Let $X,Y$ be continuous random variables. The joint c.d.f. 
+    \[
+        F(x,y) = P(X \le x, Y \le y) = \int_{-\infty}^{y}\int_{-\infty}^{x} f(s,t)\, ds \, dt
+    \]
+    where $f(x)$ is the joint p.d.f.
+    
+\end{definition}
+Question: Given the joint pmf of $X, Y$, can we find the pdf of $X$ and $Y$?
+\begin{definition}
+    $X, Y$ continuous random variables. Let $f(x,y)$ be the joint pdf. The marginal pdf of $X$ is
+    \[
+        g(x) = \int_{-\infty}^{\infty} f(x,y)\, dy, \quad -\infty < x < \infty
+    \]
+\end{definition}
+\begin{remark}
+    The marginal pdfs are just the pdfs of $X$ and $Y$ respectively.
+\end{remark}
+
+\begin{definition}
+    Let $f(x,y)$ be the joint pmf of discrete random variables $X,Y$. Let $h(y)$ be the marginal pmf of $Y$.
+    Then 
+    \[
+        f(x|y) = P(X=x,Y=y) = \frac{f(x,y)}{h(y)}
+    \]
+    for all $x \in \text{range}(x)$. $f(x|y)$ is called the conditional pmf of $X$ given $Y=y$. 
+\end{definition}
+\begin{remark}
+    We can regard the conditional probability as a function of two variables.
+\end{remark}
+
+\section{Lecture 12 - 07/10/26}
+\begin{definition}
+    The joint pdf is $f(x,y)$ of continuous random variables $X,Y$. Let $h(y)$ be the marginal pdf of $Y$.
+    \[
+        f(x|y) = \frac{f(x,y)}{h(y)}
+    \]
+    is the conditional pdf of $X$ given $Y=y$. We can regard the conditional pdfs as functions of two variables.
+\end{definition}
+\begin{definition}
+    $f(x)$ is the joint pdf of continuous random variables. $g(x)$ is the marginal pdf of $X$. $h(y)$ marginal pdf for $Y$. Then $X,Y$ are independent if 
+    \[
+        f(x,y) = g(x)h(y), \quad \forall x,y \text{ s.t. }  -\infty < x < \infty, \; -\infty< y < \infty
+    \]
+    
+\end{definition}
+\begin{remark}
+    If we are given the joint pmf/pdf, then we can find the marginal ones. The converse is not necessarily true. 
+    However, if we are given the pdf/pmfs of $X,Y$, then in general we can't find the joint pdf/pmf. When $X,Y$ are independent this is a special case where we can.
+\end{remark}
+
+\subsection{Expectation}
+After doing some random event many many times, what is the expected value? The "average" of the random variable with respect to the probability distribution.
+\begin{definition}
+    $X$ is a discrete random variable. $f(x)$ is the pmf. The expectation of $X$ is 
+    \[
+        E(X) = \sum_{x}x\cdot f(x) \in \R
+    \]
+    where you sum over all possible values of $X$. For continuous random variable,
+    \[
+        E(X) = \int_{-\infty}^{\infty} xf(x)\, dx \in \R
+    \]
+     
+\end{definition}
+
+\section{Lecture 13 - 12/10/26}
+\subsection{Expectation value for composed functions}
+\begin{definition}
+    Let $X$ be a random variable on $S$. Define a function
+    \[
+        g(t): \R \rightarrow \R 
+    \]
+
+    Then $g(X)$ is the composition of $g$ and $X$. It is a new random variable on $S$.
+\end{definition}
+
+\begin{theorem}
+    Let $X$ be a discrete random variable and $f(x)$ is the pmf. Then
+    \[
+        E(g(X)) = \sum_{x} g(x) \cdot f(x) 
+    \]
+\end{theorem}
+
+\begin{theorem}
+    Let $X$ be a continuous random variable and $f(x)$ is the pdf of $X$. Then
+    \[
+        E(g(X)) = \int_{-\infty}^{\infty} g(x)f(x)\, dx
+    \]
+    
+\end{theorem}
+
+\begin{theorem}
+    Let $a, b \in \R$ be constants. Then
+    \[
+        E(aX+b) = aE(x) + b
+    \]
+    
+\end{theorem}
+\begin{theorem}
+    let $c_1, c_2, \dots, c_n$ be constants and $g_i:\R \rightarrow \R$. Then
+    \[
+        E(\sum_{n=1}^{n}c_ig_i(X)) = \sum_{i}^{n} c_i E(g_i(X))
+    \]
+    
+\end{theorem}
+
+\begin{theorem}
+    Let $X, Y$ be discrete random variables and $f(x,y)$ is a joint pmf. then
+    \[
+        E(g(X,Y)) = \sum_{x} \sum_{y} g(x,y)f(x,y)  
+    \]
+    
+\end{theorem}
+\subsection{Moments, mean, standard deviation, variance}
+\begin{definition}
+    the $r$th moment about the origin of random variable $X$ is $\mu'_r =E(X^r)$.
+\end{definition}
+\begin{remark}
+    For $r = 0$, $\mu'_0 = E(1) = 1$.\\
+    For $r = 1$, $\mu'_1 = E(X)$ is called the mean of $X$, denoted by $\mu$.\\
+    For $r = 2$, $\mu'_2$ is called the variance of $X$ denoted by $\sigma^2$.
+\end{remark}
+\begin{definition}
+    the $r$th moment about the mean denoted by $\mu_r$ is 
+    \[
+        \mu_r = E((X-\mu)^r)
+    \] 
+    where $\mu$ is the mean of $X$.
+\end{definition}
+\begin{definition}
+    Let $X$ be a continuous random variable and $f(x)$ the pdf. Then the mean is given by
+    \[
+        \mu = \int_{-\infty}^{\infty} xf(x)\, dx
+    \]
+    and 
+    \[
+        \mu_r = \int_{-\infty}^{\infty} (x-\mu)^rf(x)\, dx
+    \]
+\end{definition}
+\begin{theorem}
+    $\sigma^2 = \mu'_2 - \mu^2 = E(X^2)-E(X)^2$
+\end{theorem}
+\begin{remark}
+    $\sigma^2 = E((x-\mu)^2) = \sum_{x}(x-\mu)^2 f(x)$ for the discrete case and $\int_{-\infty}^{\infty} (x-\mu)^2f(x)\, dx$ for the continuous case.
+\end{remark}
+
+
+\section{Lecture 14 - 14/10/26}
+\begin{theorem}
+    Let $X$ have variance $\sigma^2$. Consider $aX + b$ where $a, b$ are constant. Then it has 
+    \[
+        \text{Var}(aX+b) = a^2 \sigma^2
+    \]
+\end{theorem}
+\subsection{Intepretations of standard deviation}
+\begin{remark}   
+     The standard deviation describes how far the values of $X$ are spread from the mean. Consider the case when $X$ is a discrete random variable.
+        \[
+            \sigma^2 = E[(X-\mu)^2] = \sum (x-\mu)^2 f(x)
+        \]
+    where $f(x)$ is the pmf. The pmf is a "weighting", so then the $\sigma^2$ measures the "weighted average" squared distance to the mean. 
+    Suppose that $X$ is a continuous random variable, then 
+        \[
+            P(|x-\mu|\le t) = P(-t \le x-\mu \le t) = P(-t+\mu \le X \le \mu+t) = \int_{\mu-t}^{\mu+t} f(x)\, dx
+        \] 
+        where $f(x)$ is the pdf. In practice, we may not have all the information about $f$ to calculate the integral above. 
+        Since $\sigma^2$ describes the spread of the distribution we can estimate the probability using it.
+        This motivates the following theorem:
+\end{remark}
+\begin{theorem}[Chebyshev's Inequality]
+    \[
+        P(|x-\mu| \le t) \ge 1 - \frac{\sigma^2}{t^2}
+    \]
+\end{theorem}
+\subsection{Moment generating function}
+\begin{definition}
+    A moment generating function of a random variable $X$ is 
+    \[
+        M_X(t) = E(e^{tX})
+    \]
+    For a discrete random variable,
+    \[
+        M_X(t) = \sum_{x} e^{tx} f(x)
+    \]
+    For continuous,
+    \[
+        M_X(t) = \int_{-\infty}^{\infty} e^{tx}f(x)\, dx
+    \]
+\end{definition}
+\begin{remark} The following properties of $M_X(t)$ hold
+    \begin{enumerate}
+        \item $M_X(t)$ is a function of $t$.
+        \item $M_X(t)$ may not be defined for all $t$.
+        \item If $M_X(t)$ is defined, $M_X(t) \ge 0$.
+    \end{enumerate}
+\end{remark}
+Consider the series expansion of $e^{tx}$.
+\[
+    e^{tx} = 1+tx+\frac{t^2x^2}{2}+\frac{t^3x^3}{3!} + \cdots
+\]
+Let $X$ be a continuous random variable. then
+\begin{align*}
+    M_X(t) &= \int_{-\infty}^{\infty} (1+tx+\frac{t^2x^2}{2} + \cdots)f(x)\, dx\\
+    &= \int_{-\infty}^{\infty} f(x)\, dx + t\int_{-\infty}^{\infty} xf(x)\, dx + \frac{t^2}{2!}\int_{-\infty}^{\infty}x^2 f(x)\, dx + \cdots \\
+    &= \mu_0' + \mu_1't+\mu_2' \frac{t^2}{2!}+\cdots + \mu_r' \frac{t^r}{r!}+\cdots\\
+    &= \sum_{r=0}^{\infty} \mu_r' \frac{t^r}{r!}   
+\end{align*}
+\begin{theorem}
+    \[
+        \mu_r' = \frac{d^r M_X(t)}{dt^r}|_{t=0} = M_X^{(r)}(0)
+    \]
+\end{theorem}
+\begin{theorem}
+    Let $a, b$ be constants. Then 
+    \begin{enumerate}
+        \item $M_{X+a}(t) = E(e^{(x+a)t}) = e^{at}M_X(t)$
+        \item $M_{bX}(t) = E(e^{bXt}) = M_X(bt)$
+        \item $M_{\frac{x+a}{b}}(t) = $
+    \end{enumerate}
+    
+\end{theorem}
+
+
+
+\end{document}

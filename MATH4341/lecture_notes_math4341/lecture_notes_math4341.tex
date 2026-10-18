@@ -1,0 +1,88 @@
+\documentclass[11pt]{article}
+
+\input{preamble}
+
+\title{MATH4341 Lecture Notes}
+\author{Caelen Gelineau}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\newpage
+\section{Lecture 9 - 23/09/26}
+\begin{definition}
+    A \textit{subbasis} $\mathcal{C}$ for a topology on $X$ is a collection of subsets that cover $X$, meaning that their union is all of $X$.
+\end{definition}
+\begin{example}
+    Given $f: \R \rightarrow \R^\N = \R^\omega$, $f(t) = (t,t,\dots, t, \dots)$ and each $f_i: \R \rightarrow \R$, we want 
+    \[
+        f \text{ continuous} \iff f_i \text{ continuous}
+    \]
+   in other words,
+   \[
+    f: Y \rightarrow \prod_{i\in I}^{\infty} X_i \text{ continuous} \iff \text{each } f_i: Y \rightarrow X_i \text{ continous} 
+   \]
+    Claim: $f: \R \rightarrow (\R^\omega, \text{box topology})$ is \textbf{NOT} continuous.
+    Take basis element $B = \prod_{n = 1}^{\infty} (-\frac{1}{n}, \frac{1}{n})$ and we claim $f^{-1}(B)$ is not open in $\R$.
+    Note that $x = 0 \in f^{-1}(B)$ since $f(0) = \overrightarrow{0} \in B$. Assume it is open. Then we have an open interval $\prod_{n=1}^{\infty}(-\frac{1}{\epsilon}, \frac{1}{\epsilon}) \in B $ around $x = 0$.
+    But this implies for the box topology $(-\frac{1}{\epsilon}, \frac{1}{\epsilon}) \in (-\frac{1}{n}, \frac{1}{n}) \forall n$ which is not true, so we need a new topology.\\
+    Since $f_i = \pi_i \circ f$, we need $\pi_i$ to be continuous to satisfy the desired condition. So find a topology for which this is true. We want
+    \[
+        \pi_j: \prod_{i \in I}^{\infty} X_i \rightarrow X_j 
+    \]
+    to be continuous, so find a topology to put on the product space.
+    \[
+        \pi_j^{-1} \text{ is open in } \prod_{i \in I}^{\infty} X_i  
+    \]
+    notice that when projecting onto an open set along an axis for $\R^2$, we have
+    \[
+        \pi_j^{-1} = U_1 \times X_2
+    \]
+    for an open set $U_1$ in $X_j$. Thus the preimage is a strip where one dimension is unrestricted. The same applies for every other dimension. 
+    However, these strips are not a basis because the infinite vertical strips do not satisfy (B2) because the intersection of two strips cannot contain an infinite strip.
+    Thus we create a subbasis so that our finite rectangles are subbasis elements.
+    \[
+        \pi_j^{-1}(U_j) = \prod_{i \in I}^{\infty} V_i,  
+    \]
+    where
+    \[
+        V_i =
+        \begin{cases}
+            X_i & \text{if } i \ne j \\
+            U_j & \text{if } i = j
+        \end{cases}
+    \]
+    Also note that a basis $=$ finite intersection of a subbasis $= \prod_{i \in I}^{\infty} V_i$ where $V_i = X_i$ for all but finitely many $i$'s.
+    This is the product topology.
+    \[
+       subbasis \rightarrow_{\text{finite intersection}}basis \rightarrow_{\text{union}} topology
+    \]
+    The subbasis allows us to include the missing scalar multiplication operation for vector spaces that we are missing when we begin from just a basis.
+\end{example}
+\begin{theorem}
+   \[
+        f: Y \rightarrow \prod_{i\in I}^{\infty} X_i \text{ continuous} \iff \text{each } f_i: Y \rightarrow X_i \text{ continous} 
+   \]
+    
+\end{theorem}
+\begin{proof}
+    ($\Rightarrow$) Assume $f$ is continuous. We want to show $f^{-1}(U)$ is open in $Y$. It is enough to consider $U$ as a subbasis because subbasis implies basis holds and topology holds.
+    The preimage of the projection is of the form
+    \[
+        \pi_j^{-1}(U_j) = \prod_{i \in I}^{\infty} U_i 
+    \]
+    where $U_i = X_i\text{ if } i \ne j$.
+so then a subbasis element is
+\[
+    f^{-1}(\pi_j^{-1}(U_j)) = (\pi_j \circ f)^{-1}(U_j) = f_j^{-1}(U_j) = f_j
+\]
+thus since the subbasis elements are equal to $f_j$ the preimage of each are open in $Y$ thus $f_j$ is continuous.
+
+$f^{-1}(U)$ open in $Y$ for subbasis $U$ implies the basis $B = U_1 \cap \dots \cap U_n$ which implies $f^{-1}(B) = f^{-1}(U_1)\cap \dots$ implies open which implies holds true for topology.\footnote{Show this at home. Also show that this proof fails for box topology and why we need product topology (to show $\pi_i$ continuous for forward direction)}\\
+($\Leftarrow$) Trivial, in slides.
+
+\end{proof}
+\end{document}

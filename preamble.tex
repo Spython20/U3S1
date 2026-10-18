@@ -1,0 +1,47 @@
+% Page layout and typography
+\usepackage[margin=1in]{geometry}
+\usepackage{microtype}
+\usepackage{parskip}
+
+% Mathematics
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{bm}
+
+% Figures and links
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+% Lists
+\usepackage{enumitem}
+\setlist{nosep}
+
+% Theorem environments
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}[definition]{Example}
+\newtheorem{remark}[definition]{Remark}
+
+\theoremstyle{plain}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{corollary}[definition]{Corollary}
+
+% Common number systems
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\RS}{\mathbb{S}^2}
+\newcommand{\per}{\text{per}}
+
+% Common operators
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\id}{id}
