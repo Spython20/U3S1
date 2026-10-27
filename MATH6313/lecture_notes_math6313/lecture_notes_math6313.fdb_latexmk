@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1792506002.29767 "c:/Users/gelin/Desktop/university/U3S11/U3S1/MATH6313/lecture_notes_math6313/lecture_notes_math6313.tex" "lecture_notes_math6313.pdf" "lecture_notes_math6313" 1792506004.21512 0
+["pdflatex"] 1793107691.76074 "c:/Users/gelin/Desktop/university/U3S11/U3S1/MATH6313/lecture_notes_math6313/lecture_notes_math6313.tex" "lecture_notes_math6313.pdf" "lecture_notes_math6313" 1793107693.87433 0
   "C:/Users/gelin/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1792050366 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/gelin/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1766402407 13333512 edaced421f6f3057c03172417d150505 ""
   "C:/Users/gelin/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmbsy6.tfm" 1233951848 1124 14ccf5552bc7f77ca02a8a402bea8bfb ""
@@ -117,11 +117,11 @@
   "C:/Users/gelin/AppData/Local/Programs/MiKTeX/tex/latex/tools/calc.sty" 1761901070 10374 2ffd4f27c7f90b8a300608069537743c ""
   "C:/Users/gelin/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/gelin/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "c:/Users/gelin/Desktop/university/U3S11/U3S1/MATH6313/lecture_notes_math6313/lecture_notes_math6313.tex" 1792506001 45375 ee090fd000ef8aca9b779f9c8322ae88 ""
-  "lecture_notes_math6313.aux" 1792506003 5418 bb58c9132502c9df0778f04cc97fc87e "pdflatex"
-  "lecture_notes_math6313.out" 1792506003 7753 0cf74493da2a1033a1cde3ed994cd75d "pdflatex"
-  "lecture_notes_math6313.tex" 1792506001 45375 ee090fd000ef8aca9b779f9c8322ae88 ""
-  "lecture_notes_math6313.toc" 1792506003 3605 7ac20a4472c56a9f4690de732dacd58b "pdflatex"
+  "c:/Users/gelin/Desktop/university/U3S11/U3S1/MATH6313/lecture_notes_math6313/lecture_notes_math6313.tex" 1793107687 50006 dfe5269fcc73207baa7a910769bd3b50 ""
+  "lecture_notes_math6313.aux" 1793107693 6589 0726ebf9dad090b45b52c7f7d94d9ef9 "pdflatex"
+  "lecture_notes_math6313.out" 1793107693 9316 8ec65f0baba5536d5872aafce18c8f12 "pdflatex"
+  "lecture_notes_math6313.tex" 1793107687 50006 dfe5269fcc73207baa7a910769bd3b50 ""
+  "lecture_notes_math6313.toc" 1793107693 4407 45bbe209ecf6bb6a5dd376605e531403 "pdflatex"
   "preamble.tex" 1792367881 1205 ab69308537e6effa174a01ad97fc06bd ""
   (generated)
   "lecture_notes_math6313.aux"

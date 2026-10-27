@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1792607653.72446 "c:/Users/gelin/Desktop/university/U3S11/U3S1/STAT5351/lecture_notes_STAT5351/lecture_notes_STAT5351.tex" "lecture_notes_STAT5351.pdf" "lecture_notes_STAT5351" 1792607655.94361 0
+["pdflatex"] 1793041617.08385 "c:/Users/gelin/Desktop/university/U3S11/U3S1/STAT5351/lecture_notes_STAT5351/lecture_notes_STAT5351.tex" "lecture_notes_STAT5351.pdf" "lecture_notes_STAT5351" 1793041620.29937 0
   "C:/Users/gelin/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1792050366 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/gelin/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1095.pk" 1769027587 12668 6b98b3e418cfb5e57402e35a1f274247 ""
   "C:/Users/gelin/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1766402407 13333512 edaced421f6f3057c03172417d150505 ""
@@ -116,11 +116,11 @@
   "C:/Users/gelin/AppData/Local/Programs/MiKTeX/tex/latex/tools/calc.sty" 1761901070 10374 2ffd4f27c7f90b8a300608069537743c ""
   "C:/Users/gelin/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/gelin/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "c:/Users/gelin/Desktop/university/U3S11/U3S1/STAT5351/lecture_notes_STAT5351/lecture_notes_STAT5351.tex" 1792607652 21458 a5ea833616690ae3edd2639890be4e04 ""
-  "lecture_notes_STAT5351.aux" 1792607655 5109 c314177d7c379741ba1bd2c88cf68f85 "pdflatex"
-  "lecture_notes_STAT5351.out" 1792607655 6626 dd1d708a0127b3c3229f91d9c7e171ec "pdflatex"
-  "lecture_notes_STAT5351.tex" 1792607652 21458 a5ea833616690ae3edd2639890be4e04 ""
-  "lecture_notes_STAT5351.toc" 1792607655 3347 4d7e1ec28587100627a56242dcd4c70c "pdflatex"
+  "c:/Users/gelin/Desktop/university/U3S11/U3S1/STAT5351/lecture_notes_STAT5351/lecture_notes_STAT5351.tex" 1793041612 24293 117a85279ceb375e3dc3657805ff2587 ""
+  "lecture_notes_STAT5351.aux" 1793041619 5652 4a23590aa73cf6a2560f87c19cd554ca "pdflatex"
+  "lecture_notes_STAT5351.out" 1793041619 7446 a74264bae38a4a77674d17321f98c44c "pdflatex"
+  "lecture_notes_STAT5351.tex" 1793041612 24293 117a85279ceb375e3dc3657805ff2587 ""
+  "lecture_notes_STAT5351.toc" 1793041619 3726 e978f977aa2f039e5869cf6a03ed294b "pdflatex"
   "preamble.tex" 1792367881 1205 ab69308537e6effa174a01ad97fc06bd ""
   (generated)
   "lecture_notes_STAT5351.aux"

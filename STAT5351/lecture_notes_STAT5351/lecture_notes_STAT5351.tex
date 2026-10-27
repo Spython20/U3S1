@@ -606,7 +606,7 @@ Let $X$ be a continuous random variable. then
     The covariance measures the joint variability of $X$ and $Y$. If larger values of $X$ correspond to larger values of $Y$, then $C[X,Y] > 0$.
     If larger values of $X$ are more likely to correspond to smaller values of $Y$, then $C[X,Y] < 0$. 
 \end{remark}
-
+\subsection{Expectation of independent variables}
 \begin{theorem}
     If $X,Y$ are independent, 
     \[
@@ -656,6 +656,7 @@ Let $X$ be a continuous random variable. then
     \]
     
 \end{definition}
+\subsection{Conditional expectation}
 Suppose $X,Y$ are random variables and $Y=y$. What is the expetation/mean/variance of $X$?
 The answer is they are called the conditional expectation/mean/variance of $X$ given $Y=y$.
 \begin{definition}
@@ -664,6 +665,108 @@ The answer is they are called the conditional expectation/mean/variance of $X$ g
         E(u(x),|y)
     \]
     is the conditional expectation of $u(x)$ given $Y=y$.
+    For discrete,
+    \[
+        E(u(x)|y) = \sum_{x} u(x) f(x|y) 
+    \]
+    where $f(x|y)$ is the conditional pmf given $Y=y$. Same for continuous except with $f(x|y)$ the conditional pdf.
 \end{definition}
+\begin{definition}
+    The conditional mean of $X$ given $Y=y$ is 
+    \[
+        \mu_{x|y} = E(X|y)
+    \]
+    
+\end{definition}
+\begin{definition}
+    Conditional variance is 
+    \[
+        \sigma^2_{X|y} = E((x-\mu_{X|y})^2|y)
+    \]
+    
+\end{definition}
+\begin{remark}
+    IMPORTANT.
+    \[
+        \sigma^2_{X|y} = E(X^2|y)-E(X|y)^2
+    \]
+    still holds for conditional variance.
+\end{remark}
+
+\subsection{Special discrete random variables}
+Let $X$ be discrete and take values $x_1,x_2, \dots, x_k$. Assume
+\[
+    P(X=x_1) = P(X=x_2) = \cdots = P(x=x_k)
+\]
+Then the pmf is 
+\[
+    f(x_i) = P(X=x_i)
+\]
+and thus 
+\[
+    \sum f(x_i) = 1 \implies f(x_i) = \frac{1}{k}
+\]
+\begin{definition}
+    A discrete random variable $X$ has a uniform distribution if 
+    \[
+        f(x) = \frac{1}{k}
+    \]
+    where $f(x)$ is the pmf of $X$
+\end{definition}
+\begin{definition}
+    Let $X$ take values of either 0 or 1. Then $X$ has a Bernoulli distribution if its pmf is 
+    \[
+        f(x,\theta) = \theta^x (1-\theta)^{1-x},\quad x = 0,1
+    \]
+    
+\end{definition}
+\section{Lecture 17 - 26/10/26}
+\begin{definition}
+    A discrete random variable has a binomial distribution if its pmf is 
+    \[
+        b(x,n,\theta) = \binom{n}{x} \theta^x (1-\theta)^{n-x}
+    \]
+     
+\end{definition}
+\begin{theorem}
+   \[
+        b(x,n,\theta) = b(n-x,n,1-\theta)
+   \]
+\end{theorem}
+Notice that it is hard ot get the mean and variance of $X$ with the definition of binomial distribution. Thus,
+\begin{theorem}
+    The moment generating function of the binomial distribution is
+    \[
+        M_X(t) = (1+\theta(e^t-1))^n
+    \]
+    
+\end{theorem}
+\begin{theorem}
+    For the binomial distribution,
+    \[
+        \mu = n\theta, \quad \sigma^2  = n\theta(1-\theta)
+    \]
+    
+\end{theorem}
+\begin{remark}
+    The Bernoulli distribution is a special case of the binomial distribution where $b(x,1,\theta)$.
+\end{remark}
+We want to further understand the binomial distribution. Our goal is to fix the mean and find an approxiamation for $b(x,n,\theta)$ where $n$ is very large, i.e. $n \rightarrow \infty$.
+
+\begin{definition}
+    For a discrete random variable $X$, it has a Poisson distribution if its pmf is 
+    \[
+        P(x,\lambda) = \frac{\lambda^x e^{-\lambda}}{x!}
+    \]
+    
+\end{definition}
+
+\begin{theorem}
+    The moment generating function of the Poisson distribution is
+    \[
+        M_X(t) = e^{\lambda(e^t - 1)}     
+    \]
+    
+\end{theorem}
 
 \end{document}
