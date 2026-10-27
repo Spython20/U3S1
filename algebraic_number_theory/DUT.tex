@@ -1,0 +1,214 @@
+
+\documentclass[11pt]{article}
+\usepackage[letterpaper,margin=0.88in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\hypersetup{hidelinks,pdfauthor={},pdftitle={Dirichlet's Unit Theorem: A Concise Proof-First Exposition}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4.5pt}
+\setlist[enumerate]{leftmargin=1.65em,itemsep=2pt,topsep=3pt}
+\allowdisplaybreaks[1]
+\emergencystretch=1em
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem*{remark}{Remark}
+\newcommand{\OK}{\mathcal O_K}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Nm}{N_{K/\Q}}
+\newcommand{\vol}{\operatorname{vol}}
+\title{\vspace{-1.1cm}\textbf{Dirichlet's Unit Theorem}\\[3pt]
+\large A concise, proof-first exposition}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\vspace{-1.1cm}
+\begin{center}
+\small Based on Chapter 6 of Robert B. Ash, \emph{A Course in Algebraic Number Theory}.\\
+Organized for a roughly 30-minute mathematical presentation.
+\end{center}
+\vspace{2pt}
+
+Let $K/\Q$ be a number field of degree $n$, and let $\OK$ be its ring of integers. There are $r_1$ embeddings $K\hookrightarrow\R$ and $2r_2$ nonreal embeddings $K\hookrightarrow\C$, the latter occurring in conjugate pairs. Thus $n=r_1+2r_2$. Write $\mu(K)$ for the roots of unity in $K$ and $\OK^\times$ for its group of units.
+
+\begin{theorem}[Dirichlet's Unit Theorem]\label{thm:dut}
+The roots of unity $\mu(K)$ form a finite cyclic group, and
+\[
+\boxed{\OK^\times\cong\mu(K)\times\Z^{r_1+r_2-1}.}
+\]
+In particular, for $r=r_1+r_2-1$, there are units $\varepsilon_1,\ldots,\varepsilon_r$ such that every unit is uniquely $\zeta\varepsilon_1^{m_1}\cdots\varepsilon_r^{m_r}$, with $\zeta\in\mu(K)$ and $m_i\in\Z$.
+\end{theorem}
+
+We prove the theorem in three stages: identify the kernel of a logarithmic homomorphism, prove its image is a free abelian group, and use Minkowski's theorem to determine the rank.
+
+\section*{1. Logarithmic embedding and its kernel}
+Choose all $r_1$ real embeddings and one from each of the $r_2$ complex-conjugate pairs, denoted $\sigma_1,\ldots,\sigma_{r_1+r_2}$. Define
+\[
+\lambda:K^\times\longrightarrow\R^{r_1+r_2},\qquad
+\lambda(x)=\bigl(\log|\sigma_1(x)|,\ldots,\log|\sigma_{r_1+r_2}(x)|\bigr).
+\]
+Since embeddings preserve products, $\lambda(xy)=\lambda(x)+\lambda(y)$.
+
+\begin{lemma}[Norm criterion; Ash 6.1.1]\label{lem:norm}
+For $x\in\OK$, we have $x\in\OK^\times$ if and only if $\Nm(x)=\pm1$.
+\end{lemma}
+\begin{proof}
+If $x$ is a unit, $\Nm(x)\Nm(x^{-1})=1$; both factors are integers, so $\Nm(x)=\pm1$. Conversely, if $\Nm(x)=\pm1$, the characteristic polynomial of $x$ is monic with integer coefficients and constant term $\pm1$. By Cayley--Hamilton,
+\[
+x^n+a_{n-1}x^{n-1}+\cdots+a_1x\pm1=0,
+\]
+so $x$ times an element of $\OK$ equals $\mp1$. Hence $x^{-1}\in\OK$.
+\end{proof}
+
+For every $u\in\OK^\times$, the norm formula and Lemma~\ref{lem:norm} give
+\[
+1=|\Nm(u)|=\prod_{i=1}^{r_1}|\sigma_i(u)|
+\prod_{j=r_1+1}^{r_1+r_2}|\sigma_j(u)|^2.
+\]
+Taking logarithms shows that $\lambda(\OK^\times)$ lies in the hyperplane
+\begin{equation}\label{eq:W}
+W=\left\{y\in\R^{r_1+r_2}:
+\sum_{i=1}^{r_1}y_i+2\sum_{j=r_1+1}^{r_1+r_2}y_j=0\right\},
+\qquad \dim W=r_1+r_2-1.
+\end{equation}
+
+\begin{lemma}[Bounded inverse images; Ash 6.1.3]\label{lem:finite}
+For every bounded $C\subset\R^{r_1+r_2}$, the set
+$\{u\in\OK^\times:\lambda(u)\in C\}$ is finite.
+\end{lemma}
+\begin{proof}
+Bounded logarithms imply bounded absolute values for all $n$ conjugates of $u$ (including the omitted conjugate partners). The coefficients of its characteristic polynomial are elementary symmetric functions of these conjugates, so they are bounded. They are also integers because $u$ is integral. Hence only finitely many such polynomials occur, and each has finitely many roots.
+\end{proof}
+
+\begin{lemma}[Finite subgroups of fields; Ash 6.1.5]\label{lem:cyclic}
+Every finite subgroup $G$ of a field's multiplicative group is cyclic and consists of roots of unity.
+\end{lemma}
+\begin{proof}
+As a finite abelian group, $G$ has an element $g$ whose order $m$ equals its exponent (the least common multiple of all element orders). Every $x\in G$ satisfies $x^m=1$. As $X^m-1$ has at most $m$ roots in a field, $|G|\le m$; but $g$ already generates $m$ distinct elements. Thus $G=\langle g\rangle$.
+\end{proof}
+
+\begin{proposition}[Kernel; Ash 6.1.4--6.1.6]\label{prop:kernel}
+$\ker(\lambda|_{\OK^\times})=\mu(K)$, which is finite cyclic.
+\end{proposition}
+\begin{proof}
+Lemma~\ref{lem:finite} with $C=\{0\}$ makes the kernel finite, so Lemma~\ref{lem:cyclic} shows it consists of roots of unity. Conversely, if $\zeta^m=1$, then $\zeta,\zeta^{-1}\in\OK$ and $|\sigma_i(\zeta)|^m=1$ for every $i$. Thus $\lambda(\zeta)=0$.
+\end{proof}
+
+\section*{2. The image is a free abelian group}
+Put $H=\lambda(\OK^\times)\subseteq W$. By Lemma~\ref{lem:finite}, every bounded subset of $W$ meets $H$ in finitely many points: $H$ is a discrete subgroup.
+
+\begin{lemma}[Discrete subgroup lemma; Ash 6.1.7 and exercises]\label{lem:discrete}
+If an additive subgroup $H\subseteq\R^m$ meets each bounded set in finitely many points, then $H\cong\Z^s$, where $s=\dim_\R\operatorname{span}_\R H\le m$.
+\end{lemma}
+\begin{proof}
+Choose $e_1,\ldots,e_s\in H$ that are maximally independent over $\R$. Every $h\in H$ is $h=\sum a_ie_i$. The bounded parallelepiped $P=\{\sum t_ie_i:0\le t_i\le1\}$ contains only finitely many points of $H$. Reducing coefficients modulo $\Z$ shows that $H$ is generated by $e_1,\ldots,e_s$ and the finite set $H\cap P$.
+
+Moreover, for any $h=\sum a_ie_i$ and each positive integer $j$,
+$jh-\sum\lfloor ja_i\rfloor e_i\in H\cap P$. Two such elements coincide, forcing $(j-k)a_i\in\Z$ for some $j\ne k$ and every $i$. Thus the $a_i$ are rational. Taking a common denominator $d$ for a finite generating set gives $dH\subseteq\bigoplus_{i=1}^s\Z e_i$. A subgroup of $\Z^s$ is free, and the $e_i$ ensure its rank is exactly $s$.
+\end{proof}
+
+Apply Lemma~\ref{lem:discrete} to $H\subseteq W$ and the first isomorphism theorem:
+\[
+H\cong\Z^s,\qquad s\le\dim W=r_1+r_2-1,
+\qquad \OK^\times/\mu(K)\cong H.
+\]
+Choose units whose logarithmic images form a $\Z$-basis of $H$. Their lifts split the quotient, giving
+\begin{equation}\label{eq:partial}
+\boxed{\OK^\times\cong\mu(K)\times\Z^s,\qquad s\le r_1+r_2-1.}
+\end{equation}
+It remains to prove that equality holds.
+
+\section*{3. Minkowski's theorem gives the exact rank}
+Write $r=r_1+r_2-1$ and $V=\operatorname{span}_\R H\subseteq W$. If $r=0$, equation~\eqref{eq:partial} already proves the theorem. Assume $r>0$. It suffices to prove $V=W$.
+
+\medskip
+\textbf{Step 1: Construct integral elements with controlled conjugates.}
+The canonical embedding $\sigma:\OK\hookrightarrow\R^{r_1}\times\C^{r_2}\cong\R^n$ is a lattice of covolume $2^{-r_2}\sqrt{|D_K|}$, where $D_K$ is the field discriminant. Choose a fixed
+\[
+b>\max\left\{1,\left(\frac{2}{\pi}\right)^{r_2}\sqrt{|D_K|}\right\}.
+\]
+Take arbitrary $a_1,\ldots,a_r>0$; choose the remaining $a_{r+1}>0$ so that
+\begin{equation}\label{eq:prod}
+\prod_{i=1}^{r_1}a_i\prod_{j=r_1+1}^{r_1+r_2}a_j^2=b.
+\end{equation}
+Consider the symmetric convex body
+\[
+S=\bigl\{(y,z)\in\R^{r_1}\times\C^{r_2}:|y_i|\le a_i,\ |z_j|\le a_{r_1+j}\bigr\}.
+\]
+Its volume is $2^{r_1}\pi^{r_2}b>2^n\operatorname{covol}(\sigma(\OK))$. Minkowski's convex body theorem gives $0\ne x\in\OK$ with
+\begin{equation}\label{eq:upper}
+|\sigma_i(x)|\le a_i\qquad(1\le i\le r_1+r_2).
+\end{equation}
+
+\textbf{Step 2: Uniform logarithmic control.}
+The norm is a nonzero integer, so equations~\eqref{eq:prod}--\eqref{eq:upper} give
+$1\le|\Nm(x)|\le b$. For a fixed embedding, bound the product of all \emph{other} conjugate absolute values by $b/a_i$ (counting each complex-conjugate partner). Then
+\begin{equation}\label{eq:bound}
+\frac{a_i}{b}\le|\sigma_i(x)|\le a_i,
+\qquad 0\le\log a_i-\log|\sigma_i(x)|\le\log b.
+\end{equation}
+
+\begin{lemma}[Bounded ideal norms; used in Ash 6.2.1]\label{lem:ideals}
+For any $M>0$, only finitely many nonzero integral ideals $I\subseteq\OK$ satisfy $N(I)\le M$.
+\end{lemma}
+\begin{proof}
+If $N(I)=m$, the additive group $\OK/I$ has order $m$, so $m\in I$ and $(m)\subseteq I$. Ideals $I\supseteq(m)$ correspond to ideals of the finite ring $\OK/(m)$, of which there are finitely many. There are only finitely many integers $1\le m\le M$.
+\end{proof}
+
+\textbf{Step 3: Force a unit in every linear direction.}
+Let $f:W\to\R$ be a nonzero linear functional. Since the last coordinate on $W$ is determined by the first $r$, write $f(y)=\sum_{i=1}^r c_i y_i$ on $W$, with some $c_i\ne0$. Use the same formula to extend $f$ to a functional $F$ on $\R^{r+1}$; we need this extension for $x$ that may not be units.
+
+By equation~\eqref{eq:bound}, every element $x$ produced in Step 1 satisfies
+\begin{equation}\label{eq:linbound}
+\left|F(\lambda(x))-\sum_{i=1}^r c_i\log a_i\right|
+\le\left(\sum_{i=1}^r|c_i|\right)\log b=:C.
+\end{equation}
+Choose $t>C$. For each integer $h\ge1$, select the free parameters $a_i>0$ so that
+$\sum_i c_i\log a_i=2th$; this is possible because some $c_i\ne0$. The constructed nonzero algebraic integer $x_h$ satisfies
+\[
+(2h-1)t<F(\lambda(x_h))<(2h+1)t,\qquad 1\le|\Nm(x_h)|\le b.
+\]
+The displayed intervals are pairwise disjoint, so the values $F(\lambda(x_h))$ are distinct. Yet the principal ideals $(x_h)$ have bounded norm $N((x_h))=|\Nm(x_h)|\le b$. By Lemma~\ref{lem:ideals}, two coincide: $(x_h)=(x_k)$ for some $h\ne k$. Hence $x_h=ux_k$ for some $u\in\OK^\times$. Taking logarithms,
+\[
+f(\lambda(u))=F(\lambda(x_h))-F(\lambda(x_k))\ne0.
+\]
+Therefore no nonzero linear functional on $W$ vanishes on $V$. Hence $V=W$, so $s=\dim W=r_1+r_2-1$. Substituting into equation~\eqref{eq:partial} proves Theorem~\ref{thm:dut}. \qed
+
+\section*{4. Applications: quadratic fields}
+\textbf{Imaginary quadratic fields.} Let $K=\Q(\sqrt m)$ with $m<0$ square-free. Here $(r_1,r_2)=(0,1)$, so Dirichlet gives $\OK^\times=\mu(K)$: all units are roots of unity. If $m\not\equiv1\pmod4$, write $u=a+b\sqrt m$, and the norm criterion becomes $a^2+|m|b^2=1$. If $m\equiv1\pmod4$, write $u=(a+b\sqrt m)/2$ with $a\equiv b\pmod2$, and obtain $a^2+|m|b^2=4$. Solving these equations yields
+\[
+\boxed{\OK^\times=\begin{cases}
+\{\pm1,\pm i\},&m=-1,\\
+\{\pm1,\pm\omega,\pm\omega^2\},&m=-3,\ \omega=(-1+\sqrt{-3})/2,\\
+\{\pm1\},&\text{otherwise}.
+\end{cases}}
+\]
+
+\textbf{Real quadratic fields.} If $m>1$ is square-free, then $(r_1,r_2)=(2,0)$ and $\mu(K)=\{\pm1\}$. Thus
+\[
+\boxed{\OK^\times=\{\pm\varepsilon^k:k\in\Z\},}
+\]
+where $\varepsilon>1$ is the \emph{fundamental unit}, the smallest unit greater than $1$. It is found by the Pell-type norm conditions
+\[
+\begin{array}{ll}
+ m\not\equiv1\pmod4:&u=a+b\sqrt m,\quad a^2-mb^2=\pm1,\\[2pt]
+ m\equiv1\pmod4:&u=(a+b\sqrt m)/2,\quad a^2-mb^2=\pm4
+ \quad(a\equiv b\!\!\pmod2).
+\end{array}
+\]
+In each case, the least positive $b$ giving a solution with $a>0$ produces $\varepsilon$; continued fractions give a faster algorithm. For instance, $\varepsilon_{\Q(\sqrt2)}=1+\sqrt2$ and $\varepsilon_{\Q(\sqrt5)}=(1+\sqrt5)/2$.
+
+\textbf{A higher-degree example.} For an odd prime $p$, the cyclotomic field $\Q(\zeta_p)$ has $r_1=0$ and $r_2=(p-1)/2$, so its unit group has free rank $(p-3)/2$.
+
+\vspace{2pt}
+\noindent\rule{\linewidth}{0.3pt}
+{\small\textbf{Reference.} R. B. Ash, \emph{A Course in Algebraic Number Theory}, Chapter 6, Sections 6.1--6.3. The supporting lattice and ideal-norm facts are developed in Chapters 4--5.}
+\end{document}

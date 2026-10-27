@@ -471,7 +471,6 @@ After doing some random event many many times, what is the expected value? The "
 \begin{remark}
     For $r = 0$, $\mu'_0 = E(1) = 1$.\\
     For $r = 1$, $\mu'_1 = E(X)$ is called the mean of $X$, denoted by $\mu$.\\
-    For $r = 2$, $\mu'_2$ is called the variance of $X$ denoted by $\sigma^2$.
 \end{remark}
 \begin{definition}
     the $r$th moment about the mean denoted by $\mu_r$ is 
@@ -574,5 +573,97 @@ Let $X$ be a continuous random variable. then
 \end{theorem}
 
 
+\section{Lecture 15 - 19/10/26}
+\subsection{Product moments}
+\begin{definition}
+    The $r$th and $s$th product moment about the origin of random variables $X$ and $Y$ denoted by $\mu_{r,s}'$ is 
+    \[
+        \mu_{x,y}' = E(X^rY^s), \quad r, s = 0,1,2,3,\dots
+    \]
+    Recall that $X^rY^s$ is a random variable on $S$. and if $X, Y$ discrete,
+    \[
+        E(X^rY^s) = \sum_{x } \sum_{y} x^ry^sf(x,y) 
+    \]
+    for $f(x,y)$ joint pmf.
+\end{definition}
+\begin{definition}
+    $r$th and $s$th product moment about the means of $X, Y$ is 
+    \[
+        u_{r,s} = E((X-\mu_X)^r(Y-\mu_Y)^s)
+    \]
+    where $\mu_i$ are the means respectively.
+\end{definition}
+\begin{definition}
+    $\mu_{1,1}$ is called the covariance of $X$ and $Y$ denoted by $C[X,Y]$.
+\end{definition}
+\begin{theorem}
+    \[
+        C[X,Y] = E(XY) - E(X)E(Y) = \mu'_{1,1}-\mu_X\mu_Y
+    \]
+    
+\end{theorem}
+\begin{remark}
+    The covariance measures the joint variability of $X$ and $Y$. If larger values of $X$ correspond to larger values of $Y$, then $C[X,Y] > 0$.
+    If larger values of $X$ are more likely to correspond to smaller values of $Y$, then $C[X,Y] < 0$. 
+\end{remark}
+
+\begin{theorem}
+    If $X,Y$ are independent, 
+    \[
+        E(XY) = E(X)E(Y), \quad C[X,Y] = 0
+    \]
+    
+\end{theorem}
+
+\section{Lecture 16 - 21/10/26}
+\begin{theorem}
+    If $X_1, X_2, \dots$ are pairwise independent, 
+    \[
+        Y = \sum_{i=1}^{n} a_i X_i 
+    \]
+    then 
+    \[
+        \sigma^2_Y = \sum_{i=1}^{n} a_i^2 \sigma^2_{X_i}
+    \]
+    And if $Y_1, Y_2$ defined above but for different constants,
+    \[
+        \sigma^2_{Y_1,Y_2} = \sum a_i b_i \sigma^2_{X_i}
+    \]
+    
+\end{theorem}
+\begin{theorem}
+    Properties of covariance:
+    \begin{enumerate}
+        \item $\sigma^2_X = C[X,X]$
+        \item $C[aX,Y] = aC[X,Y]$
+        \item $C[X,Y] = C[Y,X]$
+        \item $C[X+Y,Z] = C[X,Z] + C[Y,Z]$
+    \end{enumerate}
+    
+\end{theorem}
+\begin{theorem}
+    \[
+        \sigma^2_{X+Y} = \sigma_X^2+\sigma_Y^2+2C[X,Y]
+    \]
+     \[
+        \sigma^2_{X-Y} = \sigma_X^2+\sigma_Y^2-2C[X,Y]
+    \]   
+\end{theorem}
+\begin{definition}
+    Correlation 
+    \[
+        P(X,Y) = \frac{C[X,Y]}{\sigma_X \sigma_Y}
+    \]
+    
+\end{definition}
+Suppose $X,Y$ are random variables and $Y=y$. What is the expetation/mean/variance of $X$?
+The answer is they are called the conditional expectation/mean/variance of $X$ given $Y=y$.
+\begin{definition}
+    let $u(X)$ be a function of $X$. then 
+    \[
+        E(u(x),|y)
+    \]
+    is the conditional expectation of $u(x)$ given $Y=y$.
+\end{definition}
 
 \end{document}
