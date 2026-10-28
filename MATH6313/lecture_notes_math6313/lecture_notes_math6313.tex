@@ -1749,5 +1749,142 @@ The Richardson extrapolation is
 
 
 \section{Lecture 18 - 27/10/26}
+\subsection{Integration}
+\subsubsection{Trapezoid Rule}
+Given $(x_0, y_0), (x_1,y_1)$, we first linearly interpolate using Lagrange basis
+\[
+    f(x) = y_0 \frac{x-x_1}{x_0 - x_1}+y_1 \frac{x-x_0}{x_1-x_0} + \frac{(x-x_0)(x-x_1)}{2!}f''(x) = p(x) + E(x)
+\]
+Then integrate the linear interpolation 
+\begin{align*}
+    \int_{x_0}^{x_1} p(x)\, dx&= y_0 \int_{x_0}^{x_1} \frac{x-x_1}{x_0-x_1} \, dx + y_1 \int_{x_0}^{x_1} \frac{x-x_0}{x_1-x_0}\, dx\\
+    &= y_0 \frac{h}{2} + y_1 \frac{h}{2} = \frac{y_1+y_2}{2}h
+\end{align*}
+which is the trapezoid rule. Now we integrate the error term:
+\begin{align*}
+    \int_{x_0}^{x_1} E(x)\, dx &= \frac{1}{2!}\int_{x_0}^{x_1} (x-x_0)(x-x_1)f''(c_x)\, dx \\
+    &= \frac{1}{2} f''(c_x) \int_{x_0}^{x_1}(x-x_0)(x-x_1) \, dx \\
+    &= -\frac{h^3}{12}f''(c_x)
+\end{align*}
+Combining results yields
+\[
+    \int_{x_0}^{x_1}f(x) \, dx = \frac{h}{2}(f(x_0)+f(x_1))- \frac{h^3}{12}f''(c)
+\]
+where $h = x_1 - x_0$. This is the trapezoid rule.
+\subsubsection{Simpson's rule}
+We now approxiamate the integral using 3 points: $y_0 = f(x_0), y_1=f(x_1), y_2 =f(x_2)$. Interpolate by Lagrange basis 
+\[
+    f(x) = y_0 \frac{(x-x_1)(x-x_2)}{(x_0-x_1)(x_0-x_2)}+ y_1 
+    \frac{(x-x_0)(x-x_2)}{(x_1-x_0)(x_1-x_2)}+ y_2 \frac{(x-x_0)(x-x_1)}{(x_2-x_1)(x_2-x_0)}+\frac{(x-x_0)(x-x_1)(x-x_2)}{3!}f'''(c_x) 
+\]
+Now integrate
+\[
+    \int_{x_0}^{x_2}p(x) \, dx = \int_{x_0}^{x_1}p(x) \, dx + \int_{x_1}^{x_2} p(x)\, dx = y_0 \frac{h}{3}+y_1 \frac{4h}{3} +y_2 \frac{h_3}{3} - \frac{h^5}{90}f^{(4)}(c)
+\]
+where $c$ is between $x_0, x_2$.
+
+\subsubsection{Arbitrary given data points, Composite integration}
+We will break an interval $(a,b)$ into even subintervals
+\[
+    h = x_{i+1}-x_i = \frac{b-a}{m} 
+\]
+define the subintervals as $s_i$. Then the integration is
+\[
+    \int_{a}^{b} f(x)\, dx = \int_{x}s_0 f(x) \, dx + \cdots + \int_{s_{m-1}}f(x) \, dx
+\]
+\[
+    \int_{s_i} f(x) \, dx \approx \frac{h(f(x_i)+f(x_{i+1}))}{2}
+\]
+So then
+\[
+    \int_{a}^{b} f(x) \, dx \approx \sum_{i=0}^{m-1} \frac{h}{2} (f(x_i) + f(x_{i+1}))= \frac{h}{2}\left[f(x_0)+2f(x_1)+2f(x_2)+\cdots+2f(x_{m-1})+f(x_m)\right]
+\]
+This is known as the composite trapezoid rule.
+\[
+    \int_{x_i}^{x_{i+1}} f(x)\, dx = \frac{h}{2} \left[ f(x_i) + f(x_{i+1}) \right] - \frac{h^3}{12}f''(c_i)
+\]
+and thus
+\[
+    \int_{a}^{b} f(x)\, dx = \frac{h}{2}\left[f(x_0) + 2 \sum_{i=1}^{m-1} f(x_i) + f(x_m)\right]- \sum_{i=0}^{m-1} \frac{h^3}{12}f''(c_i) 
+\]
+the error term is computed to be
+\[
+    | \int_{a}^{b} f(x)\, dx - \frac{h}{2}(f(x_0)+\sum_{i=1}^{m-1} f(x_0)+f(x_m))| \le \frac{b-a}{12}h^2 \max_{a \le c \le b}|f''(c)|
+\]
+\subsubsection{Composite Simpsons rule}
+We are given, in sets of 3 points, $a = x_0 < x_1 < x_2 < \dots < x_{2m-2} < x_{2m-1} < x_{2m} = b$, $h = x_{i+1}- x_i$
+On each $[x_{2i}, x_{2i+2}], \quad i = 0, \dots, m-1$ we have the integral
+\[
+    \int_{x_{2i}}^{x_{2i+2}} f(x)\, dx = \frac{h}{3}\left[f(x_2i)\right]+4f(x_{2i+1})+f(x_{2i+2}) - \frac{h^5}{90}f^{(4)}(c_i)
+\]
+and thus by summing each integral,
+\[
+    \int_{a}^{b} f(x)\, dx = \frac{h}{3} \left[f(a)+f(b) + 4 \sum_{i=1}^{m} f(x_{2i+1}) + 2 \sum_{i=1}^{m-1} f(x_{2i})\right]
+\]
+and the error term is
+\[
+    \sum_{i=0}^{m-1} \frac{h^5}{90}f^{(4)}(c_i) = m\frac{h^5}{90}f^{(4)}(c) = \frac{b-a}{180} h^4 f^{(4)}(c)
+\]
+\[
+    error = \left|\int_{a}^{b} f(x)\, dx - \frac{h}{3}\left[f(x_0)+f(x_{2m}) + 4 \sum_{i=1}^{m} f(x_{2i-1})+ 2 \sum_{i=1}^{m-1} f(x_{2i})\right]\right| \le \frac{b-a}{180}h^4 \max_{a \le c \le b}|f^{(4)}(c)|
+\]
+
+\begin{definition}
+    If $f(x)$ is a polynomial of degree $n$ or less and $f(x)$ is integrated exactly (and for degree $n+1$ polynomial not exactly), then degree of precision is $n$. The degree of precision of trapezoid rule is 1, and for Simpson is 3.
+\end{definition}
+
+\subsubsection{General Newton-Cotes formula}
+The trapezoid and Simpson's rule are specific cases of the Newton-Cotes formula. We have evenly spaced nodes/points in $[a,b]$
+\[
+    x_k = x_0 + kh, \quad k = 0, \dots, n
+\]
+\[
+    (x_0 = a, x_n = b), h = \frac{b-a}{n}
+\]
+\[
+    L_i(x) = \prod_{k\ne i} \frac{x-x_k}{x_i-x_k}, x = x_0 + th 
+\]
+\[
+    I^{(n)}(f) = \int_{a}^{b} \sum_{i=1}^{n} L_i(x)f(x_i)\, dx
+\]
+We can rewrite the Lagrange basis as
+\[
+    L_i(x) = \prod_{k \ne i} = \frac{a+th - (a+kh)}{a+ih-(a+kh)}  = \prod_{k \ne i} \frac{t-k}{i-k} =: \psi_i(t)
+\]
+plugging into the integral formula yields the Newton-Cotes formula
+\[ 
+    I^{(n)}(f) = h\int_{0}^{n} \sum_{i=1}^{n} \psi_i(t) f(x_i)\, dt = h\sum_{i=0}^{n} w_i f(x_i)
+\]
+where $w_i = \int_{0}^{n} \psi_i(t) \, dt$.
+
+\begin{theorem}
+    For even valued $n$, 
+    \[
+        E^{(n)}(f) = \int_{a}^{b} f(x)\, dx  - I^n(f) = \frac{M_n}{(n+2)!}h^{n+3}f^{(n+2)}(\xi), \quad M_n = \int_{0}^{n} t \Pi_{n+1}(t)\, dt < 0, \quad \Pi_{n+1}(t) = \prod_{i=0}^{n} (t-i)
+    \]
+    and for odd values of $n$,
+   \[
+        E^{(n)}(f) = \int_{a}^{b} f(x)\, dx  - I^n(f) = \frac{k_n}{(n+1)!}h^{n+2}f^{(n+1)}(\xi), \quad k_n = \int_{0}^{n} t \Pi_{n+1}(t)\, dt < 0
+   \]
+\end{theorem}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \end{document}
