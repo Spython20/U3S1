@@ -1868,16 +1868,320 @@ where $w_i = \int_{0}^{n} \psi_i(t) \, dt$.
    \]
 \end{theorem}
 
+\section{Lecture 20 - 03/11/26}
+\subsection{Review}
+From a Legendre polynomial $P_{n+1}(x)$ for quadrature nodes $x_0, x_1, \dots, x_n$, we have 
+\[
+    \int_{-1}^{1} f(x)\, dx \approx \sum_{i=0}^{n}A_if(x_i) 
+\]
+where $A_i = \int_{-1}^{1} L_i(x)\, dx$. The degree of precision is $2n+1$.
+
+\subsection{General Gaussian quadrature}
+What if we have \[
+    \int_{-1}^{1}f(x) w(x) \, dx \approx \sum_{i=0}^{n} A_i f(x_i)
+\]
+
+where $w(x)$ is a weight function, which is positive. Look for nodes $x_0, x_1, \dots, x_n$ and weights $A_0, A_1, \dots, A_n$.
+\begin{enumerate}
+    \item[Fact 1:] If given $x_0, x_1, \dots, x_n$, we can approxiamate $f \approx \sum f(x_i)L_i $ then
+    \[A_i = \int_{-1}^{1} L_i(x)w(x)\, dx\]
+    \item[Fact 2:] $x_0, x_1, \dots, x_n$ are the roots of $q \in \prod_{n+1}\footnote{polynomial of degree n+1}$ such that
+    \[
+        \int_{-1}^{1} q(x)P(x)w(x)\, dx = 0, \forall p\in \Pi_n
+    \]
+    where $q(x)$ and the Legendre polynomial $P(x)$ are weight orthogonal. Then
+    \[
+        \int_{-1}^{1} f(x)w(x)\, dx = \sum_{i=0}^{n} f(x_i)A_i, \forall f \in \Pi_{2n+1} 
+    \]
+    \begin{proof}
+    Using polynomial division, $\forall f \in \Pi_{2n+1}$, $f(x) = q(x)p(x)+r(x)$. Then 
+    \[
+        \int_{-1}^{1} f(x)w(x)\, dx = \int_{-1}^{1} q(x)p(x)w(x)\, dx + \int_{-1}^{1} r(x)w(x)\, dx
+    \]
+    and since $q, p$ are weight orthogonal, 
+    \[
+        \int_{-1}^{1} f(x)w(x)\, dx = \int_{-1}^{1} r(x)w(x)\, dx = \int_{-1}^{1} I(r)w(x)\, dx = \sum_{i=0}^{n} r(x_i)A_i = \sum_{i=0}^{n} f(x_i)A_i
+    \]
+    where $I(r)$ is the interpolated polynomial of $r(x)$ using the quadrature nodes.
+    \end{proof}
+\end{enumerate}
+   
+
+\begin{example}
+    Legendre polynomials, $w(x) \equiv 1$.
+    \[
+        \begin{cases}
+            P_0(x)=1, \quad P_1(x)=x \\
+            P_{k+1}(x) = \frac{2k+1}{k+1}xP_k(x)-\frac{k}{k+1}P_{k-1}(x)
+        \end{cases}
+    \]
+    which has orthogonality condition
+    \[
+        \int_{-1}^{1} P_k(x)P_m(x)\, dx = \delta_{km}(k+\frac{1}{2})^{-1}
+    \]
+    so
+    \[
+        \int_{-1}^{1} P_{n+1}(x)P_k(x)\, dx = 0 \implies \int_{-1}^{1} P_{n+1}(x)p(x)\, dx, \quad \forall p \in \Pi_n
+    \]
+    
+\end{example}
+
+\begin{example}
+    $w(x) = (1-x^2)^{-\frac{1}{2}}$ with Chebyshev polynomials. Recall the Chebyshev polynomials
+    \[
+        T_k(x) = \cos(k\arccos(x))
+    \]
+    \[
+        \begin{cases}
+            T_{k+1}= 2xT_k(x) - T_{k-1}(x) \\
+             T_0(x) = 1, T_1(x) = x
+        \end{cases}
+    \]
+    we have the orthogonality condition
+    \[
+        \int_{-1}^{1} T_k(x)T_n(x)(1-x^2)^{-\frac{1}{2}}\, dx = 
+        \begin{cases}
+            0 \quad \text{if } k \ne n \\
+            \text{not } 0 \quad \text{if } k = n 
+        \end{cases}
+    \]
+    Now we find roots of $T_{n+1}(x)$.
+    \begin{align*}
+        \cos((n+1)\arccos(x)) = 0 \\
+        x_j = \cos\left[\frac{2j+1}{2(n+1)}\pi\right] 
+    \end{align*}
+    And then use those roots in 
+    \[
+        A_i = \int_{-1}^{1} L_i(x)w(x)\, dx
+    \]
+    and 
+    \[
+        \int_{-1}^{1} f(x)(1-x^2)^{-\frac{1}{2}}\, dx \approx \sum_{i=0}^{n} A_i f(x_i)
+    \]
+
+\end{example}
+
+\subsection{Method of undetermined coefficients}
+Suppose you are given a quadrature formula
+\[
+    \int_{-\pi}^{\pi}f(x) \cos(x) \, dx \approx A_0 f(-\frac{3}{4}\pi) + A_1 f(-\frac{1}{4}\pi)+ A_2f(\frac{1}{4}\pi)+A_3f(\frac{3}{4}\pi)
+\]
+is exact for $\Pi_3$. Let $f(x) = 1, x, x^2, x^3$. Then you can solve for the $A_i$
+
+\[
+    \begin{pmatrix}
+        1 & 1 & 1 & 1\\
+        -3/4 \pi & -1/4 \pi & 1/4 \pi & 3/4 \pi \\
+        squared prev row \\
+        cubed prev row
+    \end{pmatrix}
+    \begin{pmatrix}
+        A_0 \\
+        A_1 \\
+        A_2  \\
+        A_3
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        0 \\
+        0 \\
+        - 4 \pi\\
+        0
+    \end{pmatrix}
+\]
+
+The matrix on RHS is $\int_{-\pi}^{\pi}f(x) \cos(x) \, dx$ is given by the exact integrals using the different $f(x)$ values.
+\begin{example}
+    \[
+    \int_{-1}^{1} x^2f(x)\, dx = af(0)+bf'(-1)+cf''(1), \quad \forall f \in \Pi_2
+    \]
+\end{example}
 
 
 
+\subsection{General orthogonal polynomials}
+For a weight function $w(x) \ge 0$,
+\[
+    \int_{-1}^{1} P_k(x)P_m(x)w(x)\, dx = 0\quad \text{if } k \ne m
+\]
+We have the Jacobi polynomials
+\[
+    J_k^{\alpha, \beta}, \quad k = 0, 1, \dots, n
+\]
+which have the orthogonality condition
+\[
+    \int_{-1}^{1} J_k^{\alpha,\beta}(x)J_n^{\alpha, \beta}(x) (1-x)^\alpha (1+x)^\beta\, dx = 0, \quad \alpha, \beta > -1, k \ne n
+\]
+We can recover Legendre polynomials with $\alpha = 0, \beta = 0$ and Chebyshev with $\alpha = \beta = \frac{1}{2}$.
+Given the space
+\[
+    L_w^2(-1,1) = \left\{ f | \int_{-1}^{1} f^2 w\, dx < \infty  \right\}
+\]
+We can use the Fourier transform
+\[
+    \sum_{k=0}^{\infty} \hat{f}_k P_k
+\]
 
+\section{Lecture 21 - 05/11/26}
+\subsection{Numerical methods of initial value problems}
+Suppose you are given $y'(t) = f(t, y(t))$. The IVP is
+\[
+    \begin{cases}
+        y' = f(t,y) \\
+        y(a) = y_a \\
+        t \in [a,b]
+    \end{cases}
+\]
+we then have equally spaced time intervals of size $h$
+\[
+    h = t_1-t_0 = t_2-t_1 = \dots = \frac{b-a}{n}
+\]
 
+\subsection{Euler's method}
+We want to approxiamate using the forward difference:
+\[
+    y'(t_i) \approx \frac{y(t_{i+1})-y(t_i)}{h} \approx f(t_i,y(t_i))
+\]
+then the Euler method is
+\[
+    \begin{cases}
+        \frac{w_{i+1}-w_i}{h}=f(t_i,w_i) \\
+         w_0=y_0
+    \end{cases}
+\]
+which equivalently is
+\[
+    \begin{cases}    
+w_0=y_0\\
+w_{i+1} = w_i + hf(t_i,w_i)
+    \end{cases}
+\]
+\begin{example}
+    \[
+    \begin{cases}
+        y'(t) = 4y(1-y) \\
+         y(0) = 0.5, h = 0.2
+    \end{cases}
+    \]
+    \[
+        w_{i+1} = w_i + 4hw_i(1-w_i)
+    \]
+    
+\end{example}
 
+\begin{example}
+    \[
+        \begin{cases}
+            y'=-2y \\
+            y(0)=1\\
+            0 \le t \le 1 \\
+        \end{cases}
+    \]
+    \[
+        w_{i+1} = w_i -2h w_i
+    \]
+    \[
+        w_1 = w_0 - 2(0.1)w_0 = 1-(0.2)(1) = 0.8
+    \]
+    \[
+        w_2 = 0.8-2(0.1)(0.8) = 0.64 
+    \]
+    \[
+        w_3 = 0.64-0.2(0.64) = 0.512
+    \]
+    \[
+        w_4 = 0.512 - 0.2(0.512) = 0.4096 
+    \]
+    \[
+        w_{10} = 0.1073741824
+    \]
+    the error is approxiamately $h$, so first order error.
+    
+\end{example}
 
+\subsection{Analysis of Euler's method}
+We have the one step IVP which is exact ODE after one step
+\[
+    \begin{cases}
+        z'=f(t,z) \\
+        z(t_i) = w_i
+    \end{cases}
+\]
+Local truncation error is $|e_{i+1}| = |w_{i+1}-z_{i+1}|$ and global truncation error is $|g_i| = |w_i-y_i$.
 
+\begin{definition}
+    A method is convergent if 
+    \[
+        \max_{1 \le i \le n} |g_i| \rightarrow 0
+    \]
+    as $h \rightarrow 0$. It is convergent with order $k$ if 
+       \[
+        \max_{1 \le i \le n} |g_i| \le ch^k
+    \] 
+    for some constnat $c>0$.
+\end{definition}
 
+\subsubsection{LTE for Euler's method}
+\[
+    z(t_{i+1}) = z(t_i) + h z'(t_i) + \frac{h^2}{2}z''(c) = w_i + hf(t_i, w_i)+\frac{h^2}{2}z''(c)
+\]
+which implies
+\[
+    |e_{i+1}| = |w_{i+1}-z_{i+1}| = \frac{h^2}{2}|z''(c)| \le \frac{h^2}{2}M
+\]
+where $M = \max_{a \le t \le b} |y''(t)|$.
 
+\begin{theorem}[convergence of Euler method]
+    Assume $f$ is Lipshitz, i.e. $|f(t,y_1) - f(t,y_2)| \le L|y_1-y_2|$.
+    Then
+    \[
+        |g_i| = |w_i-y_i| \le \frac{Mh}{2L}(e^{L(t_i-t_0)}-1)
+    \]
+    which is first order.
+\end{theorem}
+
+\begin{proof}
+    Suppose LTE $|e_i| \le ch^{k+1}$. Then
+    \[
+        g_{n+1} = w_{n+1}-y_{n+1}= (w_{n+1}-z_{n+1})+(z_{n+1}-y_{n+1})
+    \]
+    \[
+        |w_{n+1}-z_{n+1}| = |e_{n+1}| \le ch^{k+1}
+    \]
+    \[
+        |z_{n+1}-y_{n+1}| \le e^{L(t_{n+1}-t_n)}|z_n-y_n| = e^{Lh}|g_n|
+    \]
+    blah blah i don't care. QED.
+\end{proof}
+
+\subsection{Higher order methods}
+
+\[
+    y(t_{i+1}) = y(t_i) + \int_{t_i}^{t_{i+1}} y'(t) \, dt
+\]
+\[
+    = y(t_i) + \int_{t_i}^{t_{i+1}} f(t,y(t)) \, dt
+\]
+approxiamating with trapezoid rule yields
+\[
+     y(t_{i+1}) = y(t_i) + \frac{h }{2} \left[ f(t_i,y_i) + f(t_{i+1},y_{i+1})\right] 
+\]
+
+but we don't know what $y_{i+1}$ is yet. So we write the explicit trapezoidal method (Runge-Kutta 2 or Heun method).
+
+\[
+    \begin{cases}
+        s_1 = f(t_i,w_i) \\
+        s_2 = f(t_{i+1}, w_i+hs_1) 
+    \end{cases},
+    w_{i+1} = w_i + \frac{h}{2}(s_1+s_2)
+\]
+
+this is known as a one step, two stage method. The LTE is 
+\[
+    e_{i+1} = |w_{i+1}- z_{i+1}| \le ch^3
+\]
+which gives us 2nd order global error, 2nd order method.
 
 
 

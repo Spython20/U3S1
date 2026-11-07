@@ -41,3 +41,5 @@
 \contentsline {subsection}{\numberline {16.1}Conditional expectation}{13}{subsection.16.1}%
 \contentsline {subsection}{\numberline {16.2}Special discrete random variables}{14}{subsection.16.2}%
 \contentsline {section}{\numberline {17}Lecture 17 - 26/10/26}{14}{section.17}%
+\contentsline {section}{\numberline {18}Lecture 18 - 28/10/26}{15}{section.18}%
+\contentsline {subsection}{\numberline {18.1}Special pdf of continuous random variables}{15}{subsection.18.1}%
